@@ -1,0 +1,14 @@
+[Unit]
+Description=Rusty Radio
+After=mpd.target
+
+[Service]
+ExecStart=/home/pi/rusty-radio
+WorkingDirectory=/home/pi
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
