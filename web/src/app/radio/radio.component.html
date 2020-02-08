@@ -1,0 +1,34 @@
+<div class="grid-container">
+  <h1 class="mat-h1">BBC Radio</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile colspan="1" rowspan="2">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Music
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <mat-action-list>
+            <button mat-list-item *ngFor="let station of music_stations" (click)="play(station.url)"> {{station.name}} </button>
+          </mat-action-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" rowspan="2">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Talk
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <mat-action-list>
+            <button mat-list-item *ngFor="let station of talk_stations" (click)="play(station.url)"> {{station.name}} </button>
+          </mat-action-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

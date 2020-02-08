@@ -1,0 +1,61 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// **Be sure that you only ever include this mixin once!**
+@include mat-core();
+
+$mat-black: (
+  50: #000010,
+  100: #101020,
+  200: #202030,
+  300: #303040,
+  400: #404050,
+  500: #505060,
+  600: #606070,
+  700: #707080,
+  800: #808090,
+  900: #9090a0,
+  A100: #a0a0b0,
+  A200: #b0b0c0,
+  A400: #c0c0d0,
+  A700: #d0d0e0,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$dark-primary: mat-palette($mat-black);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+// Include the default theme styles.
+@include angular-material-theme($dark-theme);
+
+.mat-drawer-container{
+  background-color: #000000;
+  color: rgba(255,255,255,.87);
+}
+
+.mat-card {
+  background-color: #202020;
+}
+
+.mat-drawer-inner-container {
+  background-color: #202020;
+}

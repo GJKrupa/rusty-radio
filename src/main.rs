@@ -12,8 +12,17 @@ struct PlaySong {
 }
 
 async fn play(item: web::Json<PlaySong>) -> HttpResponse {
-    let song = Song { file: item.url.clone(), name: None, title: None, last_mod: None, duration: None, place: None, range: None, tags: Default::default() };
-    let mut conn = Client::connect("pi-radio.localdomain:6600").unwrap();
+    let song = Song {
+        file: item.url.clone(),
+        name: None,
+        title: None,
+        last_mod: None,
+        duration: None,
+        place: None,
+        range: None,
+        tags: Default::default()
+    };
+    let mut conn = Client::connect("localhost:6600").unwrap();
     conn.clear().unwrap();
     conn.push(song).unwrap();
     conn.play().unwrap();
@@ -21,7 +30,7 @@ async fn play(item: web::Json<PlaySong>) -> HttpResponse {
 }
 
 async fn stop(_req: HttpRequest) -> impl Responder {
-    let mut conn = Client::connect("pi-radio.localdomain:6600").unwrap();
+    let mut conn = Client::connect("localhost:6600").unwrap();
     conn.stop().unwrap();
     conn.clear().unwrap();
     return format!("OK");

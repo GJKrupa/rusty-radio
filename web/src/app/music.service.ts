@@ -9,12 +9,12 @@ export class MusicService {
   constructor(private http: HttpClient) { }
 
   play(url) {
-    return this.http.post("http://pi-radio.localdomain:8080/play", {
+    return this.http.post("http://localhost:8080/play", {
       url: url
     })
   }
 
   stop() {
-    return this.http.post("http://pi-radio.localdomain:8080/stop", "")
+    return this.http.post("http://localhost:8080/stop", "")
   }
 }

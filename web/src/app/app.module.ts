@@ -17,14 +17,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import {HttpClientModule} from "@angular/common/http";
 import { AlarmComponent } from './alarm/alarm.component';
-import { ClockComponent } from './clock/clock.component';
+import {RadioComponent} from "./radio/radio.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     AlarmComponent,
-    ClockComponent
+    RadioComponent
   ],
   imports: [
     BrowserModule,
