@@ -2,15 +2,27 @@ extern crate mpd;
 
 use actix_rt;
 use actix_cors::Cors;
-use actix_web::{App, HttpRequest, HttpServer, Responder, web, HttpResponse};
+use actix_web::{post, App, HttpRequest, HttpServer, web, HttpResponse};
 use mpd::{Client, Song};
 use serde::{Deserialize, Serialize};
+use crate::schedule::schedule::{CronSchedule, ScheduleStart};
+use lazy_static::lazy_static;
+use std::sync::Mutex;
+use std::thread::sleep;
+use std::time::Duration;
+
+mod schedule;
 
 #[derive(Deserialize,Serialize)]
 struct PlaySong {
     url: String
 }
 
+lazy_static!{
+    static ref SCHED: Mutex<CronSchedule> = Mutex::new(CronSchedule::new());
+}
+
+#[post("/play")]
 async fn play(item: web::Json<PlaySong>) -> HttpResponse {
     let song = Song {
         file: item.url.clone(),
@@ -29,18 +41,24 @@ async fn play(item: web::Json<PlaySong>) -> HttpResponse {
     HttpResponse::Ok().body("OK")
 }
 
-async fn stop(_req: HttpRequest) -> impl Responder {
+#[post("/stop")]
+async fn stop(_req: HttpRequest) -> HttpResponse {
     let mut conn = Client::connect("localhost:6600").unwrap();
     conn.stop().unwrap();
     conn.clear().unwrap();
-    return format!("OK");
+    HttpResponse::Ok().body("OK")
+}
+
+#[post("/startAt")]
+async fn schedule_on(item: web::Json<ScheduleStart>) -> HttpResponse {
+    SCHED.lock().unwrap().add_schedule_start(&item.into_inner());
+    HttpResponse::Created().body("Created")
 }
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-
     print!("Starting on port 8080");
-    HttpServer::new(|| {
+    let server = HttpServer::new(|| {
         App::new()
             .wrap(
                 Cors::new() // <- Construct CORS middleware builder
@@ -51,10 +69,15 @@ async fn main() -> std::io::Result<()> {
                     .allowed_methods(vec!["GET", "POST"])
                     .max_age(3600)
                     .finish())
-            .route("/play", web::post().to(play))
-            .route("/stop", web::post().to(stop))
+            .service(schedule_on)
+            .service(stop)
+            .service(play)
     })
         .bind("0.0.0.0:8080")?
-        .run()
-        .await
+        .run();
+
+    loop {
+        SCHED.lock().unwrap().tick();
+        sleep(Duration::from_millis(1000));
+    }
 }

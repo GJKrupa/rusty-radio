@@ -1,0 +1,37 @@
+POST http://localhost:8080/startAt
+Content-Type: application/json
+
+{
+  "sunday": true,
+  "monday": false,
+  "tuesday": false,
+  "wednesday": false,
+  "thursday": false,
+  "friday": false,
+  "saturday": true,
+  "hours": 16,
+  "minutes": 6,
+  "url": "",
+  "stop": true
+}
+
+###
+
+POST http://localhost:8080/startAt
+Content-Type: application/json
+
+{
+  "sunday": true,
+  "monday": false,
+  "tuesday": false,
+  "wednesday": false,
+  "thursday": false,
+  "friday": false,
+  "saturday": true,
+  "hours": 16,
+  "minutes": 5,
+  "url": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio2_mf_p",
+  "stop": false
+}
+
+###
