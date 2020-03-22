@@ -1,37 +1,23 @@
-POST http://localhost:8080/startAt
+POST http://localhost:8080/schedule
 Content-Type: application/json
 
 {
   "sunday": true,
-  "monday": false,
-  "tuesday": false,
-  "wednesday": false,
-  "thursday": false,
-  "friday": false,
+  "monday": true,
+  "tuesday": true,
+  "wednesday": true,
+  "thursday": true,
+  "friday": true,
   "saturday": true,
-  "hours": 16,
-  "minutes": 6,
-  "url": "",
-  "stop": true
+  "start_hours": 15,
+  "start_minutes": 11,
+  "end_hours": 15,
+  "end_minutes": 12,
+  "url": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio2_mf_p"
 }
 
 ###
 
-POST http://localhost:8080/startAt
-Content-Type: application/json
-
-{
-  "sunday": true,
-  "monday": false,
-  "tuesday": false,
-  "wednesday": false,
-  "thursday": false,
-  "friday": false,
-  "saturday": true,
-  "hours": 16,
-  "minutes": 5,
-  "url": "http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio2_mf_p",
-  "stop": false
-}
+GET http://localhost:8080/schedule
 
 ###

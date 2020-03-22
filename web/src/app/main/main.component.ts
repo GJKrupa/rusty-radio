@@ -8,7 +8,7 @@ import {Time} from "@angular/common";
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-  time: string = Date();
+  time = Date();
   interval;
 
   constructor() {

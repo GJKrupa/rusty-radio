@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-title>Set New Alarm</mat-card-title>
+  <mat-card-content>
+    <mat-grid-list cols="8" rowHeight="75px">
+      <mat-grid-tile><mat-slide-toggle [checked]="alarm.sunday" (change)="alarm.sunday=$event.checked">Sunday</mat-slide-toggle></mat-grid-tile>
+      <mat-grid-tile><mat-slide-toggle [checked]="alarm.monday" (change)="alarm.monday=$event.checked">Monday</mat-slide-toggle></mat-grid-tile>
+      <mat-grid-tile><mat-slide-toggle [checked]="alarm.tuesday" (change)="alarm.tuesday=$event.checked">Tuesday</mat-slide-toggle></mat-grid-tile>
+      <mat-grid-tile><mat-slide-toggle [checked]="alarm.wednesday" (change)="alarm.wednesday=$event.checked">Wedneday</mat-slide-toggle></mat-grid-tile>
+      <mat-grid-tile><mat-slide-toggle [checked]="alarm.thursday" (change)="alarm.thursday=$event.checked">Thursday</mat-slide-toggle></mat-grid-tile>
+      <mat-grid-tile><mat-slide-toggle [checked]="alarm.friday" (change)="alarm.friday=$event.checked">Friday</mat-slide-toggle></mat-grid-tile>
+      <mat-grid-tile><mat-slide-toggle [checked]="alarm.saturday" (change)="alarm.saturday=$event.checked">Saturday</mat-slide-toggle></mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+
+      <mat-grid-tile colspan="1">Start: {{alarm.start_hours | number: '2.0-0'}} : {{alarm.start_minutes | number: '2.0-0'}}</mat-grid-tile>
+      <mat-grid-tile colspan="7">
+        HH <mat-slider min="0" max="23" step="1" value="0" thumbLabel tickInterval="1" [(value)]="alarm.start_hours"></mat-slider>
+        :
+        MM <mat-slider min="0" max="59" step="1" value="0" thumbLabel tickInterval="5" [(value)]="alarm.start_minutes"></mat-slider>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1">End: {{alarm.end_hours | number: '2.0-0'}} : {{alarm.end_minutes | number: '2.0-0'}}</mat-grid-tile>
+      <mat-grid-tile colspan="7">
+        HH <mat-slider min="0" max="23" step="1" value="0" thumbLabel tickInterval="1" [(value)]="alarm.end_hours"></mat-slider>
+        :
+        MM <mat-slider min="0" max="59" step="1" value="0" thumbLabel tickInterval="5" [(value)]="alarm.end_minutes"></mat-slider>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="8">
+        <mat-form-field>
+          <mat-label>Station</mat-label>
+          <mat-select [(value)]="alarm.url">
+            <mat-option *ngFor="let station of stations" [value]="station.url">
+              {{station.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent" (click)="ok()">OK</button>
+    <a mat-raised-button color="primary" (click)="router.navigateByUrl('/alarm')">Cancel</a>
+  </mat-card-actions>
+</mat-card>

@@ -18,13 +18,19 @@ import { MatMenuModule } from '@angular/material/menu';
 import {HttpClientModule} from "@angular/common/http";
 import { AlarmComponent } from './alarm/alarm.component';
 import {RadioComponent} from "./radio/radio.component";
+import {MatTableModule} from "@angular/material/table";
+import {CreateComponent} from "./alarm/create/create.component";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     AlarmComponent,
-    RadioComponent
+    RadioComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,11 @@ import {RadioComponent} from "./radio/radio.component";
     MatCardModule,
     MatMenuModule,
     HttpClientModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    MatGridListModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

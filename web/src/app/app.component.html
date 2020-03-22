@@ -7,9 +7,9 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Functions</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/main']">Main</a>
-      <a mat-list-item [routerLink]="['/radio']">Radio</a>
-      <a mat-list-item [routerLink]="['/alarm']">Alarm</a>
+      <a mat-list-item (click)="router.navigateByUrl('/main')">Main</a>
+      <a mat-list-item (click)="router.navigateByUrl('/radio')">Radio</a>
+      <a mat-list-item (click)="router.navigateByUrl('/alarm')">Alarm</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -18,6 +18,7 @@
         <mat-icon>stop</mat-icon>
       </button>
 
+      <div class="clock">{{time | date : 'HH:mm:ss'}}</div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

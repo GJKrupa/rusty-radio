@@ -1,6 +1,14 @@
 .clock {
-  text-align: center;
-  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+  display: table;
+  overflow: hidden;
+}
+
+.time {
   font-family: Roboto, sans-serif;
   font-size: 144pt;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
 }
